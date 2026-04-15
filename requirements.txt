@@ -1,0 +1,15 @@
+# Esquiva los Meteoritos - Dependencias
+# =============================================
+# OPCION A (recomendada): usar instalar.bat
+#   Crea un entorno virtual limpio y aislado
+#
+# OPCION B: instalar manualmente con:
+#   pip install -r requirements.txt
+#
+# NOTA: estas versiones son compatibles entre si
+# y NO requieren TensorFlow instalado.
+# =============================================
+
+opencv-python==4.10.0.84
+mediapipe==0.10.18
+numpy==1.26.4

@@ -1,136 +1,105 @@
-# 🚀 Esquiva los Meteoritos — Body Dodge Game con IA
+# 🚀 ESQUIVA LOS METEORITOS
+### Juego de IA para Feria Universitaria
+---
 
-> Juego interactivo donde esquivas meteoritos usando tu cuerpo en tiempo real, detectado por Inteligencia Artificial.
+## 🎮 ¿Qué hace este juego?
+La cámara detecta tu cuerpo en tiempo real usando **MediaPipe Pose**.
+Aparecen meteoritos cayendo desde arriba y debes **esquivarlos con tu cuerpo real**.
 
-![Python](https://img.shields.io/badge/Python-3.10%2B-blue?logo=python)
-![OpenCV](https://img.shields.io/badge/OpenCV-4.x-green?logo=opencv)
-![MediaPipe](https://img.shields.io/badge/MediaPipe-0.10.x-orange)
-![License](https://img.shields.io/badge/License-MIT-purple)
+- Hasta **3 jugadores** al mismo tiempo
+- Dificultad que **aumenta** automáticamente
+- Efectos de partículas y fondo espacial
+- Ranking final de puntajes
 
 ---
 
-## 🎮 ¿De qué trata?
-
-La cámara detecta tu cuerpo usando **IA de detección de pose** y en pantalla caen meteoritos que debes esquivar moviéndote físicamente. Si un meteorito toca tu cuerpo, pierdes una vida. Si lo esquivas, ganas puntos.
-
-- 👥 Hasta **3 jugadores** al mismo tiempo
-- 🤖 **IA en tiempo real** — detecta tu pose 30 veces por segundo
-- 🌟 Dificultad que **aumenta progresivamente**
-- 💥 Efectos visuales de partículas al recibir impacto
-- 🏆 Pantalla de ranking al final de cada partida
-
----
-
-## 🧠 ¿Cómo funciona la IA?
-
-Este proyecto usa **Computer Vision** (Visión por Computadora) para detectar el cuerpo humano en cada fotograma de la cámara.
-
-```
-Cámara (OpenCV)
-    ↓
-MediaPipe PoseLandmarker
-    ↓
-Detección de 33 puntos del cuerpo (landmarks)
-    ↓
-Selección de puntos clave: cabeza y cintura
-    ↓
-Cálculo de distancia euclidiana meteorito ↔ cuerpo
-    ↓
-Colisión detectada → pierde vida / esquiva → gana punto
-```
-
-La tecnología detrás es **MediaPipe**, una librería de Google entrenada con millones de imágenes de personas para reconocer posiciones del cuerpo humano en tiempo real.
-
----
-
-## 🛠️ Tecnologías utilizadas
-
-| Tecnología | Uso |
-|---|---|
-| Python 3.10+ | Lenguaje principal |
-| OpenCV | Captura de cámara y renderizado |
-| MediaPipe | Detección de pose del cuerpo |
-| NumPy | Cálculos matemáticos |
-
----
-
-## ⚙️ Instalación
+## 🛠️ Instalación (1 sola vez)
 
 ### Requisitos
-- Python 3.10 o superior
-- Cámara web
-- Windows / Linux / Mac
+- Python 3.8 o superior
+- Cámara web (la de la laptop funciona)
 
 ### Pasos
-
-**Windows (forma rápida):**
-```
-1. Ejecutar instalar.bat   ← instala todo automáticamente
-2. Ejecutar jugar.bat      ← abre el juego
-```
-
-**Manual:**
 ```bash
-# Crear entorno virtual
-python -m venv venv_juego
-source venv_juego/bin/activate  # Linux/Mac
-venv_juego\Scripts\activate     # Windows
-
-# Instalar dependencias
+# 1. Instalar dependencias
 pip install -r requirements.txt
 
-# Ejecutar
+# 2. Ejecutar el juego
 python game.py
 ```
-
-> ⚠️ **Nota:** La primera vez que ejecutes el juego, se descargará automáticamente el modelo de pose de MediaPipe (~3 MB). Necesitas conexión a internet solo esa vez.
 
 ---
 
 ## 🎯 Controles
-
 | Tecla | Acción |
-|---|---|
-| Moverse físicamente | Esquivar meteoritos |
-| `R` | Reiniciar partida |
-| `ESPACIO` | Pausar / Continuar |
+|-------|--------|
 | `Q` o `ESC` | Salir |
+| `R` | Reiniciar juego |
+| `ESPACIO` | Pausar / Continuar |
 
 ---
 
-## 🌍 Aplicaciones reales de esta tecnología
-
-La misma tecnología usada en este juego se aplica en:
-
-- 🏥 **Fisioterapia** — análisis de movimiento de pacientes
-- ⚽ **Deporte** — corrección de postura en atletas
-- 🎬 **Cine** — captura de movimiento (motion capture)
-- 🎮 **Videojuegos** — control corporal (ej. Xbox Kinect)
-- 🏢 **Seguridad** — detección de caídas en espacios públicos
+## 👥 Cómo jugar en la feria
+1. Colocar la laptop con la cámara mirando hacia los jugadores
+2. Los jugadores se ponen **de pie frente a la cámara** (a ~1.5-2 metros)
+3. El juego detecta automáticamente y empieza
+4. **¡Esquiva los meteoritos moviéndote!**
+5. Si un meteorito toca tu cuerpo → pierdes una vida ♥
+6. Si un meteorito pasa sin tocarte → ¡ganas un punto!
 
 ---
 
-## 📁 Estructura del proyecto
+## 🔧 Ajustes rápidos (en `game.py`)
 
-```
-esquiva_meteoritos/
-│
-├── game.py               # Código principal del juego
-├── requirements.txt      # Dependencias
-├── instalar.bat          # Instalador automático (Windows)
-├── jugar.bat             # Lanzador del juego (Windows)
-└── README.md             # Este archivo
+```python
+CAMERA_INDEX = 0      # Cambiar a 1 si usas cámara externa
+INITIAL_LIVES = 3     # Vidas por jugador
+INITIAL_SPEED = 4     # Velocidad inicial de meteoritos
+MAX_PLAYERS = 3       # Jugadores simultáneos (máx 3)
+BODY_RADIUS = 18      # Sensibilidad de colisión (px)
 ```
 
 ---
 
-## 👨‍💻 Autor
-
-Desarrollado como proyecto para feria universitaria.  
-Demuestra el uso de **Inteligencia Artificial aplicada** con Computer Vision en un entorno interactivo y didáctico.
+## 💡 Tips para la feria
+- Pon el cartel: **"Esquiva los meteoritos usando solo tu cuerpo – IA detecta tu pose en tiempo real"**
+- Asegúrate de tener **buena iluminación** (la detección mejora mucho)
+- Un espacio libre de ~2x2 metros frente a la cámara es ideal
+- La distancia óptima es **1 a 2.5 metros** de la cámara
 
 ---
 
-## 📄 Licencia
+## 🏗️ Arquitectura del proyecto
 
-MIT — libre para usar, modificar y compartir.
+```
+Cámara (OpenCV)
+    ↓
+MediaPipe Pose (detección de 33 puntos del cuerpo)
+    ↓
+Extracción de landmarks (hombros, codos, caderas, etc.)
+    ↓
+Generación de meteoritos (posición, velocidad, forma)
+    ↓
+Detección de colisión (distancia euclidiana punto-a-punto)
+    ↓
+Actualización de puntaje y vidas
+    ↓
+Renderizado en pantalla (OpenCV)
+```
+
+---
+
+## 🐛 Problemas comunes
+
+**"No se pudo leer la cámara"**
+→ Cambia `CAMERA_INDEX = 0` a `CAMERA_INDEX = 1`
+
+**Detección lenta**
+→ Cierra otras aplicaciones. El modelo usa `model_complexity=0` (el más rápido)
+
+**No detecta el cuerpo**
+→ Mejorar iluminación, alejarse un poco más de la cámara
+
+---
+
+Creado con ❤️ usando Python + OpenCV + MediaPipe
